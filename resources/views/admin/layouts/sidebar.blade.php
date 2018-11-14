@@ -48,11 +48,32 @@
                     </span></a>
                 </li>
                   
-                <li><a href="{{ route('admin.publish') }}"><i class="fa fa-inbox"></i> Published
-                  <span class="label label-primary pull-right">{{ $publish }}</span></a></li>
-                <li><a href="{{ route('admin.pending') }}"><i class="fa fa-file-text-o"></i>For Publishing</a></li>
-                <li><a href="{{ route('admin.editing') }}">
-                  <i class="fa fa-filter"></i> For Editing <span class="label label-warning pull-right">65</span></a>
+                <li>
+                  <a href="{{ route('admin.publish') }}">
+                    <i class="fa fa-inbox"></i> 
+                        Published
+                      <span class="label label-primary pull-right">
+                        {{ $publish }}
+                      </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.pending') }}">
+                    <i class="fa fa-file-text-o"></i>
+                        For Publishing
+                      <span class="label label-primary pull-right">
+                        {{ $forpublish }}
+                      </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{{ route('admin.editing') }}">
+                    <i class="fa fa-filter"></i>
+                        For Editing
+                      <span class="label label-primary pull-right">
+                          {{ $forediting }}
+                      </span>
+                  </a>
                 </li>
                 <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
               

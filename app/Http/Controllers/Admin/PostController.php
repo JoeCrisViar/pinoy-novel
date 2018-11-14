@@ -33,8 +33,9 @@ class PostController extends Controller
         //for sidebar count
         
         $publish = post::where('status', 1)->count();
-
-        return view('admin.post.index', compact('posts', 'publish'));
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        return view('admin.post.index', compact('posts', 'publish', 'forpublish', 'forediting'));
     }
 
     /**
@@ -58,8 +59,10 @@ class PostController extends Controller
 
             //for sidebar count
             $publish = post::where('status', 1)->count();
+            $forpublish = post::where('status', 0)->count();
+            $forediting = post::where('status', null)->count();
 
-            return view('admin.post.create', compact('tags', 'categories', 'posts', 'publish'));
+            return view('admin.post.create', compact('tags', 'categories', 'posts', 'publish', 'forpublish', 'forediting'));
         }
 
         return redirect(route('admin.home'));
@@ -131,7 +134,13 @@ class PostController extends Controller
             //NOTE: with('tags', 'categories') are model function names
             $post = post::with('tags', 'categories')->where('id', $id)->first();
 
-            return view('admin.post.edit', compact('tags','categories','post'));
+            //for sidebar count
+            $posts = post::all();
+            $publish = post::where('status', 1)->count();
+            $forpublish = post::where('status', 0)->count();
+            $forediting = post::where('status', null)->count();
+
+            return view('admin.post.edit', compact('tags','categories','post', 'posts', 'publish', 'forpublish', 'forediting'));
         }
         
         return redirect(route('admin.home'));
@@ -162,6 +171,7 @@ class PostController extends Controller
         //Updating post in posts table 
         $post = post::find($id);
         $post->cover_image = $path;
+        $post->status = 0;
         $post->fill($request->all())->save();
 
             //NOTE:$request->tags = ('tags' name of input form) 

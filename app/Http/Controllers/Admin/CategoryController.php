@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\user\category;
+use App\Model\user\post;
 
 class CategoryController extends Controller
 {
@@ -31,7 +32,14 @@ class CategoryController extends Controller
     {
         $categories = category::all();
 
-        return view('admin.category.index', compact('categories'));
+        //for sidebar count
+        
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+
+        return view('admin.category.index', compact('categories', 'posts', 'publish', 'forpublish', 'forediting'));
     }
 
     /**
@@ -41,7 +49,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+
+        return view('admin.category.create', compact('posts', 'publish', 'forpublish', 'forediting'));
     }
 
     /**
@@ -84,7 +97,12 @@ class CategoryController extends Controller
     {
         $category = category::where('id', $id)->first();
 
-        return view('admin.category.edit', compact('category'));
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+
+        return view('admin.category.edit', compact('category', 'posts', 'publish', 'forpublish', 'forediting'));
     }   
 
     /**
