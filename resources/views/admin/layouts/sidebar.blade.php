@@ -55,9 +55,43 @@
                     @endif
                   </a>
                 </li>
-                  
+                @can('posts.create', Auth::user())
+                  <li>
+                    <a href="{{route('post.create')}}">
+                      <i class="fa fa-dot"></i>
+                          Create Post
+                    </a>
+                  </li>
+                @endcan
+                @can('posts.update', Auth::user())
+                  <li>
+                    <a href="{{ route('admin.editing') }}">
+                      <i class="fa fa-edit"></i>
+                          For Editing
+                          @if($forediting > 0)
+                            <span class="label label-danger pull-right">
+                                {{ $forediting }}
+                            </span>
+                          @endif
+                    </a>
+                  </li>
+                @endcan
+                @can('posts.publish', Auth::user())
+                  <li>
+                    <a href="{{ route('admin.publishing') }}">
+                      <i class="fa fa-file-text-o"></i>
+                          For Publishing
+                          @if($forpublish > 0)
+                            <span class="label label-warning pull-right">
+                              {{ $forpublish }}
+                            </span>
+                          @endif
+                    </a>
+                  </li>
+                @endcan
+
                 <li>
-                  <a href="{{ route('admin.publish') }}">
+                  <a href="{{ route('admin.published') }}">
                     <i class="fa fa-inbox"></i> 
                         Published
                         @if($publish > 0)
@@ -67,29 +101,10 @@
                         @endif
                   </a>
                 </li>
-                <li>
-                  <a href="{{ route('admin.pending') }}">
-                    <i class="fa fa-file-text-o"></i>
-                        For Publishing
-                        @if($forpublish > 0)
-                          <span class="label label-warning pull-right">
-                            {{ $forpublish }}
-                          </span>
-                        @endif
-                  </a>
-                </li>
-                <li>
-                  <a href="{{ route('admin.editing') }}">
-                    <i class="fa fa-filter"></i>
-                        For Editing
-                        @if($forediting > 0)
-                          <span class="label label-danger pull-right">
-                              {{ $forediting }}
-                          </span>
-                        @endif
-                  </a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                
+                @can('posts.delete', Auth::user())
+                  <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                @endcan
               
             </ul>
         </li>

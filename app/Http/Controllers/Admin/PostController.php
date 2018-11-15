@@ -37,7 +37,7 @@ class PostController extends Controller
         $forediting = post::where('status', null)->count();
         $categories = category::all();
         
-        return view('admin.post.index', compact('posts', 'publish', 'forpublish', 'forediting', 'genres', 'categories'));
+        return view('admin.post.index', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -211,24 +211,40 @@ class PostController extends Controller
     }
 
     
-    public function publish()
+    public function published()
     {
+        //for sidebar count
         $posts = post::all();
-
         $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
         
-        return view('admin.post.publish', compact('posts', 'publish'));
+        return view('admin.post.published', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
     
-    public function pending()
+    public function publishing()
     {
-        $posts = post::find('status' == 1)->count();
-        
-        return view('admin.post.pending');
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+
+        return view('admin.post.publishing', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     public function editing()
     {
-        return view('admin.post.editing');
+
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+
+        return view('admin.post.editing', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 }

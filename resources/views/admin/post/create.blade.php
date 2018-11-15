@@ -4,21 +4,7 @@
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Text Editors
-            <small>Advanced form element</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="home"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">Editors</li>
-          </ol>
-          
-        </section>
-        
-        <!-- Display Errors -->
-        @include('includes.messages')
+        @include('includes.content_header')
         
         <!-- Main content -->
         <section class="content">
@@ -66,6 +52,13 @@
                                                                 Publish
                                                         </label>
                                                     </div>
+                                                @else
+                                                <div class="checkbox pull-mid">
+                                                    <label>
+                                                        <input type="checkbox" name="" value="" disabled> 
+                                                            Publish
+                                                    </label>
+                                                </div>
                                                 @endcan
                                             </div>
                                             <br>

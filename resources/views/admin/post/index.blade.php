@@ -11,7 +11,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Post</h3>
+                <h2 class="box-title">List</h2>
 
                 {{-- User Authentication if permission --}}
                 @can('posts.create', Auth::user())
@@ -43,8 +43,8 @@
                               <th>Title</th>
                               <th>Subtitle</th>
                               <th>Slug</th>
-                              <th>Created At</th>
-                                @can('posts.update', Auth::user())
+                              <th>Post Created</th>
+                                @can('posts.publish', Auth::user())
                                     <th>Edit</th>
                                 @endcan
                                 @can('posts.delete', Auth::user())
@@ -66,8 +66,8 @@
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->subtitle }}</td>
                                         <td>{{ $post->slug }}</td>
-                                        <td>{{ $post->created_at }}</td>
-                                        @can('posts.update', Auth::user())
+                                        <td>{{ $post->created_at->diffForHumans() }}</td>
+                                        @can('posts.publish', Auth::user())
                                             <td>
                                                 <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">
                                                     <span class="glyphicon glyphicon-edit"></span>
@@ -105,8 +105,8 @@
                                 <th>Title</th>
                                 <th>Subtitle</th>
                                 <th>Slug</th>
-                                <th>Created At</th>
-                                @can('posts.update', Auth::user())
+                                <th>Post Created</th>
+                                @can('posts.publish', Auth::user())
                                     <th>Edit</th>
                                 @endcan
                                 @can('posts.delete', Auth::user())

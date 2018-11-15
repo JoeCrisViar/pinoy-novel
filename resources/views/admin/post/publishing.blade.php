@@ -11,7 +11,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h2 class="box-title">Editing</h2>
+                <h2 class="box-title">Publishing</h2>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -36,7 +36,7 @@
                               <th>S.No</th>
                               <th>Title</th>
                               <th>Subtitle</th>
-                              <th>Post Created</th>
+                              <th>Post Edited</th>
                                 @can('posts.update', Auth::user())
                                     <th>Edit</th>
                                 @endcan
@@ -47,12 +47,12 @@
                             </thead>
                             <tbody>
                                 @foreach ($posts as $post)
-                                    @if ($post->status === null)
+                                    @if ($post->status === 0)
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>{{ $post->title }}</td>
                                             <td>{{ $post->subtitle }}</td>
-                                            <td>{{ $post->created_at->diffForHumans() }}</td>
+                                            <td>{{ $post->updated_at->diffForHumans() }}</td>
                                             @can('posts.update', Auth::user())
                                                 <td>
                                                     <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">
@@ -91,7 +91,7 @@
                                 <th>S.No</th>
                                 <th>Title</th>
                                 <th>Subtitle</th>
-                                <th>Post Created</th>
+                                <th>Post Edited</th>
                                 @can('posts.update', Auth::user())
                                     <th>Edit</th>
                                 @endcan

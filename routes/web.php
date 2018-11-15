@@ -42,11 +42,11 @@ Route::group(['namespace' => 'Admin'], function(){
 
     Route::resource('admin/post', 'PostController');
 
-    Route::get('admin/publish', 'PostController@publish')->name('admin.publish');
+    Route::get('admin/published', 'PostController@published')->name('admin.published');
 
-    Route::get('admin/pending', 'PostController@pending')->name('admin.pending');
+    Route::get('admin/forpublishing', 'PostController@publishing')->name('admin.publishing');
 
-    Route::get('admin/editing', 'PostController@editing')->name('admin.editing');
+    Route::get('admin/forediting', 'PostController@editing')->name('admin.editing');
 
     // Tag Routes
 
