@@ -6,6 +6,7 @@ use App\Model\admin\Permission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\user\post;
+use App\Model\user\category;
 
 class PermissionController extends Controller
 {
@@ -35,8 +36,9 @@ class PermissionController extends Controller
         $publish = post::where('status', 1)->count();        
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.permission.index', compact('permissions', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.permission.index', compact('permissions', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -51,8 +53,9 @@ class PermissionController extends Controller
         $publish = post::where('status', 1)->count();        
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.permission.create', compact('posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.permission.create', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -102,8 +105,9 @@ class PermissionController extends Controller
         $publish = post::where('status', 1)->count();        
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.permission.edit', compact('permission', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.permission.edit', compact('permission', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\user\tag;
 use App\Model\user\post;
+use App\Model\user\category;
 
 class TagController extends Controller
 {
@@ -37,8 +38,9 @@ class TagController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.tag.index',compact('tags', 'posts', 'publish', 'forpublish', 'forediting'));//->with('tags', $tags);
+        return view('admin.tag.index',compact('tags', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));//->with('tags', $tags);
     }
 
     /**
@@ -55,8 +57,9 @@ class TagController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.tag.create',compact('posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.tag.create',compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -106,8 +109,9 @@ class TagController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.tag.edit', compact('tag', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.tag.edit', compact('tag', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**

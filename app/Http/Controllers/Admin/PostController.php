@@ -35,7 +35,9 @@ class PostController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
-        return view('admin.post.index', compact('posts', 'publish', 'forpublish', 'forediting'));
+        $categories = category::all();
+        
+        return view('admin.post.index', compact('posts', 'publish', 'forpublish', 'forediting', 'genres', 'categories'));
     }
 
     /**
@@ -122,7 +124,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, category $category)
     {
         //Restricts Admin users to access EDIT/UPDATE module if not permitted to
         if (Auth::user()->can('posts.update')) {
@@ -139,8 +141,10 @@ class PostController extends Controller
             $publish = post::where('status', 1)->count();
             $forpublish = post::where('status', 0)->count();
             $forediting = post::where('status', null)->count();
+            $categories = category::all();
+            
 
-            return view('admin.post.edit', compact('tags','categories','post', 'posts', 'publish', 'forpublish', 'forediting'));
+            return view('admin.post.edit', compact('tags','categories','post', 'posts', 'publish', 'forpublish', 'forediting', 'genres', 'categories'));
         }
         
         return redirect(route('admin.home'));

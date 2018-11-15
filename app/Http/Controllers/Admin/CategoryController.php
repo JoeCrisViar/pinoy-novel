@@ -28,7 +28,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(category $category, post $post)
     {
         $categories = category::all();
 
@@ -39,7 +39,8 @@ class CategoryController extends Controller
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
 
-        return view('admin.category.index', compact('categories', 'posts', 'publish', 'forpublish', 'forediting'));
+        
+        return view('admin.category.index', compact('categories', 'posts', 'publish', 'forpublish', 'forediting', 'genres', 'post'));
     }
 
     /**
@@ -53,8 +54,9 @@ class CategoryController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.category.create', compact('posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.category.create', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -73,7 +75,7 @@ class CategoryController extends Controller
           $category = new category;
           $category->create($request->all());
 
-          return redirect(route('category.create'))->with('success', 'Category Created');
+          return redirect(route('category.index'))->with('success', 'Category Created');
     }
 
     /**
@@ -96,13 +98,13 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = category::where('id', $id)->first();
-
+        $categories = category::all();
         $posts = post::all();
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
 
-        return view('admin.category.edit', compact('category', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.category.edit', compact('category', 'categories', 'posts', 'publish', 'forpublish', 'forediting'));
     }   
 
     /**

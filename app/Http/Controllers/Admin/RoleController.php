@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\admin\role;
 use App\Model\admin\Permission;
 use App\Model\user\post;
+use App\Model\user\category;
 
 class RoleController extends Controller
 {
@@ -35,8 +36,9 @@ class RoleController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.role.index',compact('roles', 'posts', 'publish', 'forpublish', 'forediting'));//->with('tags', $tags);
+        return view('admin.role.index',compact('roles', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));//->with('tags', $tags);
     }
 
     /**
@@ -54,8 +56,9 @@ class RoleController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.role.create', compact('permissions', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.role.create', compact('permissions', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -111,8 +114,9 @@ class RoleController extends Controller
         $publish = post::where('status', 1)->count();
         $forpublish = post::where('status', 0)->count();
         $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.role.edit', compact('role', 'permissions', 'posts', 'publish', 'forpublish', 'forediting'));
+        return view('admin.role.edit', compact('role', 'permissions', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**

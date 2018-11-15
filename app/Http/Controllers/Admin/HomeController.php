@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Model\user\post;
+use App\Model\user\category;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -24,7 +25,10 @@ class HomeController extends Controller
         $posts = post::all();
 
         $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
 
-        return view('admin.home', compact('posts', 'publish'));
+        return view('admin.home', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 }

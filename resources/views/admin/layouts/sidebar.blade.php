@@ -42,37 +42,51 @@
             <ul class="treeview-menu" style="">
               
                 
-                <li class="active"><a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i>List
-                    <span class="label label-success pull-right">
-                        {{count($posts)}}
-                    </span></a>
+                <li class="active">
+                  <a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i>List
+                    @if(count($posts) > 0)  
+                      <span class="label label-success pull-right">
+                          {{count($posts)}}
+                      </span></a>
+                    @else
+                      <span class="label label-success pull-right">
+                        empty list
+                      </span>
+                    @endif
+                  </a>
                 </li>
                   
                 <li>
                   <a href="{{ route('admin.publish') }}">
                     <i class="fa fa-inbox"></i> 
                         Published
-                      <span class="label label-primary pull-right">
-                        {{ $publish }}
-                      </span>
+                        @if($publish > 0)
+                          <span class="label label-primary pull-right">
+                            {{ $publish }}
+                          </span>
+                        @endif
                   </a>
                 </li>
                 <li>
                   <a href="{{ route('admin.pending') }}">
                     <i class="fa fa-file-text-o"></i>
                         For Publishing
-                      <span class="label label-primary pull-right">
-                        {{ $forpublish }}
-                      </span>
+                        @if($forpublish > 0)
+                          <span class="label label-warning pull-right">
+                            {{ $forpublish }}
+                          </span>
+                        @endif
                   </a>
                 </li>
                 <li>
                   <a href="{{ route('admin.editing') }}">
                     <i class="fa fa-filter"></i>
                         For Editing
-                      <span class="label label-primary pull-right">
-                          {{ $forediting }}
-                      </span>
+                        @if($forediting > 0)
+                          <span class="label label-danger pull-right">
+                              {{ $forediting }}
+                          </span>
+                        @endif
                   </a>
                 </li>
                 <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
@@ -88,23 +102,28 @@
               </span>
             </a>
             <ul class="treeview-menu" style="">
-              <li><a href=""><i class="fa fa-dot-circle-o"></i>Action</a></li>
-              <li><a href="#"><i class="fa fa-dot-circle-o"></i> Adventure
-                <span class="label label-primary pull-right">12</span></a></li>
-              <li><a href="#"><i class="fa fa-dot-circle-o"></i>Comedy</a></li>
-              <li><a href="#">
-                <i class="fa fa-dot-circle-o"></i> Drama <span class="label label-warning pull-right">65</span></a>
+
+              {{-- Restrics admin user to access CATEGORY menu sidebar if not permitted --}}
+              @can('posts.category', Auth::user())
+               <li>
+                 <a href="{{route('category.index')}}"><i class="fa fa-circle-o"></i> List
+                  <span class="label label-success pull-right">
+                      {{count($categories)}}
+                  </span>
+                  </a>
               </li>
-              
+              @endcan
+              @foreach ($categories as $category)    
+                <li><a href="#"><i class="fa fa-dot-circle-o"></i> {{ $category->name }}
+                  <span class="label label-primary pull-right"></span>
+                </a></li>
+              @endforeach
             </ul>
         </li>
             
             <div class="box-body no-padding">
               <ul class="nav nav-pills nav-stacked">
-                  {{-- Restrics admin user to access CATEGORY menu sidebar if not permitted --}}
-                  @can('posts.category', Auth::user())
-                    <li><a href="{{route('category.index')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
-                  @endcan
+                  
                   {{-- Restrics admin user to access TAG menu sidebar if not permitted --}}
                   @can('posts.tag', Auth::user())
                     <li><a href="{{route('tag.index')}}"><i class="fa fa-circle-o"></i>Tags</a></li>

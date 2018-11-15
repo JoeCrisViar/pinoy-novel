@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Model\admin\admin;
 use App\Model\admin\role;
 use App\Model\user\User;
+use App\Model\user\post;
+use App\Model\user\category;
 
 class UserController extends Controller
 {
@@ -25,7 +27,14 @@ class UserController extends Controller
     {
         $users = admin::all();
 
-        return view('admin.user.index', compact('users'));
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+
+        return view('admin.user.index', compact('users', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -38,7 +47,14 @@ class UserController extends Controller
         //NOTE: for drop selection form
         $roles = role::all();
 
-        return view('admin.user.create', compact('roles'));
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+
+        return view('admin.user.create', compact('roles', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
@@ -89,7 +105,15 @@ class UserController extends Controller
 
         $roles = role::all();
 
-        return view('admin.user.edit', compact('user', 'roles'));
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+        
+
+        return view('admin.user.edit', compact('user', 'roles', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 
     /**
