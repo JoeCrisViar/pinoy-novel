@@ -26,22 +26,14 @@
       <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">Content</li>
 
-
         <li class="treeview">
-          <a href="{{ route('admin.home') }}" class="logo">
-            <i class="fa fa-home"></i>
-          </a>
-          </li>
-        <li class="treeview">
-            <a href="#">
+            <a href="">
               <i class="fa fa-circle-o"></i> <span>Posts</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu" style="">
-              
-                
                 <li class="active">
                   <a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i>All Post
                     @if(count($posts) > 0)  
@@ -50,7 +42,7 @@
                       </span></a>
                     @else
                       <span class="label label-success pull-right">
-                        empty list
+                        empty
                       </span>
                     @endif
                   </a>
