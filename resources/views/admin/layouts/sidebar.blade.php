@@ -28,7 +28,7 @@
 
 
         <li class="treeview">
-          <a href="{{ route('admin.home')}}">
+          <a href="{{ route('admin.home') }}" class="logo">
             <i class="fa fa-home"></i>
           </a>
           </li>
@@ -43,7 +43,7 @@
               
                 
                 <li class="active">
-                  <a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i>List
+                  <a href="{{route('post.index')}}"><i class="fa fa-circle-o"></i>All Post
                     @if(count($posts) > 0)  
                       <span class="label label-success pull-right">
                           {{count($posts)}}
@@ -129,9 +129,11 @@
               </li>
               @endcan
               @foreach ($categories as $category)    
-                <li><a href="#"><i class="fa fa-dot-circle-o"></i> {{ $category->name }}
+              <li>
+                <a href="{{ route('admin.category', $category->slug) }}"><i class="fa fa-dot-circle-o"></i> {{ $category->name }}
                   <span class="label label-primary pull-right"></span>
-                </a></li>
+                </a>
+              </li>
               @endforeach
             </ul>
         </li>

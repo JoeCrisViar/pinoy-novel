@@ -55,8 +55,7 @@
                                                 @else
                                                 <div class="checkbox pull-mid">
                                                     <label>
-                                                        <input type="checkbox" name="" value="" disabled> 
-                                                            Publish
+                                                       {{-- Show Nothing --}}
                                                     </label>
                                                 </div>
                                                 @endcan

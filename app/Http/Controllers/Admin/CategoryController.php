@@ -139,4 +139,18 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('success', 'Category Deleted');
     }
+
+    public function category(category $category, Request $request)
+    {
+        
+        $genres = $category->posts();
+        //for sidebar count
+        $posts = post::all();
+        $publish = post::where('status', 1)->count();
+        $forpublish = post::where('status', 0)->count();
+        $forediting = post::where('status', null)->count();
+        $categories = category::all();
+
+        return view('admin.category.genre', compact('genres', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
+    }
 }

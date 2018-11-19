@@ -247,4 +247,7 @@ class PostController extends Controller
 
         return view('admin.post.editing', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
+
+    
+
 }

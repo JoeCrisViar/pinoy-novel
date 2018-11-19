@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Model\user\post;
 use App\Model\user\category;
+use App\Model\user\tag;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -31,4 +32,5 @@ class HomeController extends Controller
 
         return view('admin.home', compact('posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
+
 }

@@ -146,4 +146,11 @@ class TagController extends Controller
 
         return redirect()->back()->with('success', 'Tag Deleted');
     }
+
+    public function tag(tag $tag, Request $request)
+    {
+        $posts = $tag->posts();
+
+        return view('user.blog', compact('posts'));
+    }
 }

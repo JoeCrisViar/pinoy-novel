@@ -32,6 +32,8 @@ Route::group(['namespace' => 'User'], function(){
 
 Route::group(['namespace' => 'Admin'], function(){
 
+    //Home Routes
+
     Route::get('admin/home', 'HomeController@index')->name('admin.home');
 
     // User Routes
@@ -50,11 +52,15 @@ Route::group(['namespace' => 'Admin'], function(){
 
     // Tag Routes
 
-    Route::resource('admin/tag', 'TagController');    
+    Route::resource('admin/tag', 'TagController');
+    
+    Route::get('admin/tag/{tag}', 'TagController@tag')->name('admin.tag');
 
     // Category Routes
 
     Route::resource('admin/category', 'CategoryController');
+
+    Route::get('admin/category/{category}', 'CategoryController@category')->name('admin.category');
 
     // Roles Routes
 
