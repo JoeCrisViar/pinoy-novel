@@ -77,6 +77,16 @@ class PostPolicy
         return $this->getPermission($user, 9);
     }
 
+    public function permission(admin $user)
+    {
+        return $this->getPermission($user, 10);
+    }
+
+    public function role(admin $user)
+    {
+        return $this->getPermission($user, 11);
+    }
+
 
     protected function getPermission($user, $p_id)
     {

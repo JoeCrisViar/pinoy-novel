@@ -19,6 +19,9 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+
+        //Restrics admin user to jump access ROLE menu thru URL if not permitted
+        $this->middleware('can:posts.publish');
     }
 
     /**

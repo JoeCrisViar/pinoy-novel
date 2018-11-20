@@ -129,21 +129,62 @@
               @endforeach
             </ul>
         </li>
-            
-            <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
-                  
-                  {{-- Restrics admin user to access TAG menu sidebar if not permitted --}}
-                  @can('posts.tag', Auth::user())
-                    <li><a href="{{route('tag.index')}}"><i class="fa fa-circle-o"></i>Tags</a></li>
-                  @endcan
-                  <li><a href="{{route('role.index')}}"><i class="fa fa-circle-o"></i> Roles</a></li>
-                  <li><a href="{{route('permission.index')}}"><i class="fa fa-circle-o"></i> Permissions</a></li>
-                  <li><a href="{{route('user.index')}}"><i class="fa fa-circle-o"></i> Users</a></li>
-              </ul>
-            </div>
-            <!-- /.box-body -->
-
+        {{-- Restrics admin user to access TAG menu sidebar if not permitted --}}
+        @can('posts.tag', Auth::user())    
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-circle-o"></i> <span>Tags</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="">
+                <li><a href="{{route('tag.index')}}"><i class="fa fa-dot-circle-o"></i>Tags</a></li>
+            </ul>
+        </li>
+        @endcan
+        {{-- (Allows only the PUBLISHER ROLE to have access) Restrics admin user to access ROLES menu sidebar if not permitted --}}
+        @can('posts.publish', Auth::user())
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-circle-o"></i> <span>Roles</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="">
+                <li><a href="{{route('role.index')}}"><i class="fa fa-dot-circle-o"></i>Roles</a></li>
+            </ul>
+        </li>
+        @endcan
+        {{-- (Allows only the PUBLISHER ROLE to have access) Restrics admin user to access PERMISSION menu sidebar if not permitted --}}
+        @can('posts.publish', Auth::user())
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-circle-o"></i> <span>Permissions</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="">
+                <li><a href="{{route('permission.index')}}"><i class="fa fa-dot-circle-o"></i>Permissions</a></li>
+            </ul>
+        </li>
+        @endcan
+        {{-- (Allows only the PUBLISHER ROLE to have access) Restrics admin user to access USERS menu sidebar if not permitted --}}
+        @can('posts.publish', Auth::user())
+        <li class="treeview">
+            <a href="">
+              <i class="fa fa-circle-o"></i> <span>Users</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="">
+                <li><a href="{{route('user.index')}}"><i class="fa fa-dot-circle-o"></i>Users</a></li>
+            </ul>
+        </li>
+        @endcan
       </ul>
     </section>
     <!-- /.sidebar -->

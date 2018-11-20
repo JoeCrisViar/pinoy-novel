@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-lg-6 col-md-10 col-sm-12">
                   <center>
-                    <h4>CATEGORIES</h4>
+                    <h4>GENRE</h4>
                     @foreach($post->categories as $category)
                       <a href="{{ route('category', $category->slug) }}" class="">| {{$category->name}} |</a>
                     @endforeach
