@@ -8,7 +8,7 @@ class post extends Model
 {
     public $table = 'posts';
     
-    protected $fillable =['title', 'subtitle', 'slug', 'body','status'];
+    protected $fillable =['title_id', 'subtitle', 'slug', 'body','status'];
 
     public function tags()
     {
@@ -20,6 +20,10 @@ class post extends Model
         return $this->belongsToMany('App\Model\user\category', 'category_posts')->withTimestamps();
     }
 
+    public function title()
+    {
+        return $this->belongsTo('App\Model\admin\Title');
+    }
     //for user to get post (LARAVEL BUILT IN FUNCTION)
     public function getRouteKeyName()
     {

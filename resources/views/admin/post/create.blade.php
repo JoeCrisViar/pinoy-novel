@@ -24,8 +24,15 @@
                             <div class="box-body">
                                     <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="title">Title</label>
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" value="{{ old('title') }}">
+                                                    <label for="title">Title</label>
+                                                    <select   class="form-control select2 select2-hidden-accessible"
+                                                      data-placeholder="Select a Title" style="width: 100%;" 
+                                                     tabindex="-1" aria-hidden="true" name="title_id" id="title_id">
+                                                            <option value="" selected>Choose Title</option>
+                                                        @foreach ($titles as $title)
+                                                            <option value="{{$title->id}}">{{$title->title}}</option>
+                                                        @endforeach
+                                                    </select>
                                             </div>
                 
                                             <div class="form-group">
@@ -40,16 +47,13 @@
                                     </div>
                                     <div class="col-lg-6">
                                             <div class="form-group" style="margin-top:5px;">
-                                                <div class="pull-left">
-                                                    <label for="cover_image">Upload Cover image   </label>
-                                                    <input type="file" name="cover_image" id="cover_image">
-                                                </div>
                                                 @can('posts.publish', Auth::user())
-                                                    <div class="checkbox pull-mid">
-                                                        <label>
-                                                            <input type="checkbox" name="status" value="1"
+                                                    <div class="checkbox" style="margin-left:25px">
+                                                       
+                                                        <input style="width: 25px; height: 25px;" type="checkbox" name="status" value="1"
                                                             @if(old('status') == 1) {{'checked'}} @endif> 
-                                                                Publish
+                                                         <label style="font-size:18px;">    
+                                                             Publish
                                                         </label>
                                                     </div>
                                                 @else
@@ -72,7 +76,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group" style="margin-top:18px;">
-                                                <label>Select Categories</label>
+                                                <label>Select Genre</label>
                                                 <select  class="form-control select2 select2-hidden-accessible"
                                                  multiple="" data-placeholder="Select a State" style="width: 100%;" 
                                                  tabindex="-1" aria-hidden="true" name="categories[]">
@@ -123,6 +127,7 @@
 
 @section('admin_css')
 <link rel="stylesheet" href="{{asset('admin/bower_components/select2/dist/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('admin/custom/post_title_select.css')}}">
 @endsection
 
 @section('admin_js')

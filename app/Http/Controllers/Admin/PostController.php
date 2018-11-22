@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Model\user\post;
 use App\Model\user\tag;
 use App\Model\user\category;
+use App\Model\admin\Title;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -50,6 +51,8 @@ class PostController extends Controller
         //Restricts Admin users to access create module if not permitted to
         if (Auth::user()->can('posts.create')) {
 
+            $titles = Title::all();
+
             //NOTE: for multiple selection form
             $tags = tag::all();
 
@@ -58,13 +61,13 @@ class PostController extends Controller
 
             //for sidebar count
             $posts = post::all();
-
+            
             //for sidebar count
             $publish = post::where('status', 1)->count();
             $forpublish = post::where('status', 0)->count();
             $forediting = post::where('status', null)->count();
 
-            return view('admin.post.create', compact('tags', 'categories', 'posts', 'publish', 'forpublish', 'forediting'));
+            return view('admin.post.create', compact('titles','tags', 'categories', 'posts', 'publish', 'forpublish', 'forediting'));
         }
 
         return redirect(route('admin.home'));
@@ -81,22 +84,14 @@ class PostController extends Controller
     {
         
         $request->validate([
-            'title' => 'required',
+            'title_id' => 'required',
             'subtitle' => 'required',
             'slug' => 'required',
             'body' => 'required',
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
           ]);
 
-            
-            if($request->hasFile('cover_image'))
-            {
-                $path =  $request->cover_image->store('public');
-            }
-            
-            //NOTE: save form requests to db
+        //NOTE: save form requests to db
           $post = new post;
-          $post->cover_image = $path;
           $post->fill($request->all())->save();
             
             //NOTE:$request->tags = ('tags' name of input form) 
@@ -128,13 +123,16 @@ class PostController extends Controller
     {
         //Restricts Admin users to access EDIT/UPDATE module if not permitted to
         if (Auth::user()->can('posts.update')) {
+
+            //NOTE: for multiple selection form
+            $titles = Title::all();
             //NOTE: for multiple selection form
             $tags = tag::all();
             //NOTE: for multiple selection form
             $categories = category::all();
 
             //NOTE: with('tags', 'categories') are model function names
-            $post = post::with('tags', 'categories')->where('id', $id)->first();
+            $post = post::with('tags', 'categories', 'title')->where('id', $id)->first();
 
             //for sidebar count
             $posts = post::all();
@@ -144,7 +142,7 @@ class PostController extends Controller
             $categories = category::all();
             
 
-            return view('admin.post.edit', compact('tags','categories','post', 'posts', 'publish', 'forpublish', 'forediting', 'genres', 'categories'));
+            return view('admin.post.edit', compact('titles','tags','categories','post', 'posts', 'publish', 'forpublish', 'forediting', 'genres', 'categories'));
         }
         
         return redirect(route('admin.home'));

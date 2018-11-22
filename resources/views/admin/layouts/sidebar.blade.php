@@ -26,6 +26,45 @@
       <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">Content</li>
 
+         <li class="treeview">
+            <a href="">
+              <i class="fa fa-circle-o"></i> <span>Titles</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu" style="">
+                <li class="active">
+                  <a href="{{route('title.index')}}"><i class="fa fa-circle-o"></i>All Title
+                    @if(count($posts) > 0)  
+                      <span class="label label-success pull-right">
+                          {{count($posts)}}
+                      </span></a>
+                    @else
+                      <span class="label label-success pull-right">
+                        empty
+                      </span>
+                    @endif
+                  </a>
+                </li>
+                
+                  <li>
+                    <a href="{{route('title.create')}}">
+                      <i class="fa fa-dot"></i>
+                          Create Title
+                    </a>
+                  </li>
+              
+                @can('posts.delete', Auth::user())
+                  <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                @endcan
+              
+            </ul>
+        </li>
+
+
+
+
         <li class="treeview">
             <a href="">
               <i class="fa fa-circle-o"></i> <span>Posts</span>

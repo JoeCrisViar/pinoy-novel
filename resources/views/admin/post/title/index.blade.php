@@ -15,16 +15,16 @@
 
                 {{-- User Authentication if permission --}}
                 @can('posts.create', Auth::user())
-                    <a class="col-lg-offset-5 btn btn-primary" href="{{route('post.create')}}">Add New</a>
+                    <a class="col-lg-offset-5 btn btn-primary" href="{{route('title.create')}}">Add New</a>
                 @endcan
 
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                <i class="fa fa-times"></i></button>
-            </div>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                    <i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i></button>
+                </div>
             </div>
             <div class="box-body">
                 {{-- Data Tables --}}
@@ -38,12 +38,10 @@
                           <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                              <th>S.No</th>
-                              <th>Published</th>
-                              <th>Title</th>
-                              <th>Subtitle</th>
-                              <th>Slug</th>
-                              <th>Post Created</th>
+                              <th>No</th>
+                              <th>Titles</th>
+                              
+                              
                                 @can('posts.publish', Auth::user())
                                     <th>Edit</th>
                                 @endcan
@@ -53,30 +51,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($posts as $post)
+                                @foreach ($titles as $title)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
-                                        <td>
-                                            @if ($post->status == 1)
-                                                <i class="fa fa-fw fa-thumbs-o-up"></i>
-                                            @else
-                                                <i class="fa fa-fw fa-thumbs-down"></i>
-                                            @endif
-                                        </td>
-                                        <td>{{ $post->title->title}}</td>
-                                        <td>{{ $post->subtitle }}</td>
-                                        <td>{{ $post->slug }}</td>
-                                        <td>{{ $post->created_at->diffForHumans() }}</td>
+                                        
+                                        <td>{{ $title->title }}</td>
+                                        
                                         @can('posts.publish', Auth::user())
                                             <td>
-                                                <a href="{{ route('post.edit', $post->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('title.edit', $title->id) }}" class="btn btn-primary">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                 </a>
                                             </td>
                                         @endcan
                                         @can('posts.delete', Auth::user())
                                             <td>
-                                                <form id="delete-form-{{$post->id}}" action="{{ route('post.destroy', $post->id) }}" method="POST" >
+                                                <form id="delete-form-{{$title->id}}" action="{{ route('title.destroy', $title->id) }}" method="POST" >
                                                     {{ csrf_field() }}
 
                                                     {{ method_field('DELETE') }}
@@ -84,7 +74,7 @@
                                                     <a  href="" 
                                                             onclick=" if(confirm('Delete this post?'))
                                                                 {   event.preventDefault(); 
-                                                                    document.getElementById('delete-form-{{$post->id}}').submit();
+                                                                    document.getElementById('delete-form-{{$title->id}}').submit();
                                                                 }else{
                                                                     event.preventDefault();
                                                                 }" 
@@ -100,12 +90,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>S.No</th>
-                                <th>Published</th>
-                                <th>Title</th>
-                                <th>Subtitle</th>
-                                <th>Slug</th>
-                                <th>Post Created</th>
+                                <th>No</th>
+                                <th>Titles</th>
+                
                                 @can('posts.publish', Auth::user())
                                     <th>Edit</th>
                                 @endcan

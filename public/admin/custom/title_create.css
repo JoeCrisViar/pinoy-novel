@@ -1,0 +1,22 @@
+[name="title"] {
+    height:50px; 
+    font-size:30px;
+}
+
+.box-body {
+    margin-left: 300px;
+}
+
+.title_label {
+    display: inline-block;
+    margin-inline-start: 210px;
+    font-size: 2em;
+}
+
+.btn_create{
+    margin-left: 175px; 
+}
+
+.btn {
+    margin-left: 5px;
+}

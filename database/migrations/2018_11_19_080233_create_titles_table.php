@@ -15,7 +15,6 @@ class CreateTitlesTable extends Migration
     {
         Schema::create('titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('post_id');
             $table->string('title');
             $table->string('cover_image')->nullable();
             $table->timestamps();

@@ -50,6 +50,10 @@ Route::group(['namespace' => 'Admin'], function(){
 
     Route::get('admin/forediting', 'PostController@editing')->name('admin.editing');
 
+    // Title Routes
+
+    Route::resource('admin/title', 'TitleController');
+
     // Tag Routes
 
     Route::resource('admin/tag', 'TagController');
