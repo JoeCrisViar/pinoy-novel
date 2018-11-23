@@ -54,6 +54,8 @@ Route::group(['namespace' => 'Admin'], function(){
 
     Route::resource('admin/title', 'TitleController');
 
+    Route::get('admin/title/{id}/chapters', 'TitleController@chapter' )->name('title.chapter');
+
     // Tag Routes
 
     Route::resource('admin/tag', 'TagController');

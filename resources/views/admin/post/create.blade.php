@@ -36,7 +36,7 @@
                                             </div>
                 
                                             <div class="form-group">
-                                                <label for="title">Subtitle</label>
+                                                <label for="title">Chapter # : Subtitle</label>
                                                 <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Enter subtitle" value="{{ old('subtitle') }}">
                                             </div>
                 
@@ -65,26 +65,12 @@
                                                 @endcan
                                             </div>
                                             <br>
-                                            <div class="form-group" style="margin-top:10px;">
-                                                <label>Select Tags</label>
-                                                <select  class="form-control select2 select2-hidden-accessible"
-                                                        multiple="" data-placeholder="Select a State" style="width: 100%;" 
-                                                        tabindex="-1" aria-hidden="true" name="tags[]">
-                                                    @foreach ($tags as $tag)
-                                                        <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group" style="margin-top:20px;">
+                                                {{-- TAGS Nothing to show --}}
                                             </div>
                                             <div class="form-group" style="margin-top:18px;">
-                                                <label>Select Genre</label>
-                                                <select  class="form-control select2 select2-hidden-accessible"
-                                                 multiple="" data-placeholder="Select a State" style="width: 100%;" 
-                                                 tabindex="-1" aria-hidden="true" name="categories[]">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>  
+                                                {{-- GENRE / CATEGORISE Nothing to show --}}
+                                            </div>   
                                     </div>
                                 </div>
                                 <!-- /.box-body -->

@@ -35,20 +35,15 @@
                                                                 @if($post->title->id == $title->id)
                                                                     selected
                                                                 @endif
-                                                            
-                                                            
                                                             >{{$title->title}}
                                                         </option>
                                                     @endforeach
                                                 </select>
 
-                                            
-                                            
-                                                
                                             </div>
                 
                                             <div class="form-group">
-                                                <label for="title">Subtitle</label>
+                                                <label for="title">Chapter # : Subtitle</label>
                                             <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Enter subtitle" value="{{$post->subtitle}}">
                                             </div>
                 

@@ -158,21 +158,15 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
+            'title_id' => 'required',
             'subtitle' => 'required',
             'slug' => 'required',
             'body' => 'required',
-            'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
           ]);
         
-          if($request->hasFile('cover_image'))
-          {
-              $path =  $request->cover_image->store('public');
-          }
 
         //Updating post in posts table 
         $post = post::find($id);
-        $post->cover_image = $path;
         $post->status = 0;
         $post->fill($request->all())->save();
 

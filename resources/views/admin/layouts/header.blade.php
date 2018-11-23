@@ -21,8 +21,8 @@
                 </a>
               </li>
               <li>
-                <a href="">
-                  <i class="fa fa-user"></i>
+                <a href="{{ route('admin.home') }}">
+                  <i class="fa fa-fw fa-envelope"></i>  
                 </a>
               </li>
               <li>

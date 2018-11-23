@@ -11,11 +11,15 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h2 class="box-title">List</h2>
+                <h2 class="box-title">
+                    @foreach ($title as $post)
+                        {{$post->title}}
+                    @endforeach
+                </h2>
 
                 {{-- User Authentication if permission --}}
                 @can('posts.create', Auth::user())
-                    <a class="col-lg-offset-5 btn btn-primary" href="{{route('title.create')}}">Add New</a>
+                    <a class="col-lg-offset-5 btn btn-primary" href="">Add Chapter</a>
                 @endcan
 
                 <div class="box-tools pull-right">
@@ -39,7 +43,7 @@
                             <thead>
                             <tr>
                               <th>No</th>
-                              <th>Titles</th>
+                              <th>Chapters</th>
                               
                               
                                 @can('posts.publish', Auth::user())
@@ -51,22 +55,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($titles as $title)
+                                @foreach ($chapters as $chapter)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
                                         
-                                        <td><a href="{{ route('title.chapter', $title->id) }}">{{ $title->title }}</a></td>
+                                        <td><a href="{{ route('title.show', $chapter->id) }}">{{ $chapter->subtitle }}</a></td>
                                         
                                         @can('posts.publish', Auth::user())
                                             <td>
-                                                <a href="{{ route('title.edit', $title->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('title.edit', $chapter->id) }}" class="btn btn-primary">
                                                     <span class="glyphicon glyphicon-edit"></span>
                                                 </a>
                                             </td>
                                         @endcan
                                         @can('posts.delete', Auth::user())
                                             <td>
-                                                <form id="delete-form-{{$title->id}}" action="{{ route('title.destroy', $title->id) }}" method="POST" >
+                                                <form id="delete-form-{{$chapter->id}}" action="{{ route('title.destroy', $chapter->id) }}" method="POST" >
                                                     {{ csrf_field() }}
 
                                                     {{ method_field('DELETE') }}
@@ -74,7 +78,7 @@
                                                     <a  href="" 
                                                             onclick=" if(confirm('Delete this post?'))
                                                                 {   event.preventDefault(); 
-                                                                    document.getElementById('delete-form-{{$title->id}}').submit();
+                                                                    document.getElementById('delete-form-{{$chapter->id}}').submit();
                                                                 }else{
                                                                     event.preventDefault();
                                                                 }" 
@@ -91,7 +95,7 @@
                             <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Titles</th>
+                                <th>Chapters</th>
                 
                                 @can('posts.publish', Auth::user())
                                     <th>Edit</th>

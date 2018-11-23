@@ -41,7 +41,7 @@
                               <th>S.No</th>
                               <th>Published</th>
                               <th>Title</th>
-                              <th>Subtitle</th>
+                              <th>Chapter</th>
                               <th>Slug</th>
                               <th>Post Created</th>
                                 @can('posts.publish', Auth::user())
@@ -103,7 +103,7 @@
                                 <th>S.No</th>
                                 <th>Published</th>
                                 <th>Title</th>
-                                <th>Subtitle</th>
+                                <th>Chapter</th>
                                 <th>Slug</th>
                                 <th>Post Created</th>
                                 @can('posts.publish', Auth::user())

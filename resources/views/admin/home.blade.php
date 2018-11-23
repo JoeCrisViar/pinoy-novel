@@ -66,9 +66,9 @@
                                                         </label>
                                                     </td>
                                                   
-                                                    <td>{{ $post->title }}</td>
-                                                    <td>{{ $post->subtitle }}</td>
-                                                    <td>{{ $post->created_at }}</td>
+                                                    <td>Sender (User)</td>
+                                                    <td><a href="">This Should be email subject update notification</a></td>
+                                                    <td>Date Received</td>
                                                 </tr>
                                             @endforeach 
                                         

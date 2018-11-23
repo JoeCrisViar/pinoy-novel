@@ -103,7 +103,7 @@ class TitleController extends Controller
      */
     public function show(Title $title)
     {
-        //
+        
     }
 
     /**
@@ -138,5 +138,19 @@ class TitleController extends Controller
     public function destroy(Title $title)
     {
         //
+    }
+
+    public function chapter($id)
+    {
+        $title = Title::where('id', $id)->get();
+        $chapters = post::where('title_id', $id)->get();
+        $posts = post::all();
+         //for sidebar count
+         $publish = post::where('status', 1)->count();
+         $forpublish = post::where('status', 0)->count();
+         $forediting = post::where('status', null)->count();
+         $categories = category::all();
+
+        return view('admin.post.title.chapters', compact('title', 'chapters', 'posts', 'publish', 'forpublish', 'forediting', 'categories'));
     }
 }
